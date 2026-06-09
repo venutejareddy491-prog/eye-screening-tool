@@ -4,39 +4,64 @@ echo   Pushing Smart Dry Eye Screening Tool to GitHub
 echo ===================================================
 echo.
 
+:: Check for git
+git --version >nul 2>&1
+if errorlevel 1 (
+    echo Git is not installed or not in PATH. Install Git for Windows and try again.
+    pause
+    exit /b 1
+)
+
+:: Parameters: [remote-url] [commit-message]
+set "REMOTE=%~1"
+set "COMMIT_MSG=%~2"
+if "%REMOTE%"=="" set "REMOTE=https://github.com/venutejareddy491-prog/eye-screening-tool.git"
+if "%COMMIT_MSG%"=="" set "COMMIT_MSG=chore: update files"
+
+set "BRANCH=gitmain"
+
 :: Initialize Git repository if not already initialized
 if not exist .git (
     echo [1/5] Initializing Git repository...
     git init
+    git checkout -b %BRANCH%
 ) else (
     echo Git repository already initialized.
+    :: Ensure we're on the target branch
+    git rev-parse --verify %BRANCH% >nul 2>&1
+    if errorlevel 1 (
+        git checkout -b %BRANCH%
+    ) else (
+        git checkout %BRANCH%
+    )
 )
 
 :: Add files
 echo [2/5] Staging files...
 git add .
 
-:: Commit
-echo [3/5] Committing files...
-git commit -m "Initial commit: Complete Smart Dry Eye Screening Tool"
-
-:: Set branch to main
-echo [4/5] Setting default branch to main...
-git branch -M main
+:: Commit (only if there are staged changes)
+echo [3/5] Committing files (if any)...
+git diff --staged --quiet >nul 2>&1
+if errorlevel 1 (
+    git commit -m "%COMMIT_MSG%"
+) else (
+    echo No changes to commit.
+)
 
 :: Add or update remote origin
-echo [5/5] Configuring remote origin...
+echo [4/5] Configuring remote origin...
 git remote remove origin >nul 2>&1
-git remote add origin https://github.com/venutejareddy491-prog/eye-screening-tool.git
+git remote add origin %REMOTE%
 
-:: Push to main
+:: Push to branch
 echo.
 echo ===================================================
-echo   Attempting to push to GitHub (main branch)
-echo   Note: If prompted, please authenticate in your browser
+echo   Attempting to push to GitHub (%BRANCH% branch)
+echo   Note: You may be prompted to authenticate.
 echo ===================================================
 echo.
-git push -u origin main
+git push -u origin %BRANCH%
 
 if %ERRORLEVEL% equ 0 (
     echo.

@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans antialiased bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-white/40 dark:border-slate-700/50 rounded-2xl shadow-glass;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-healthcare-600 to-healthcare-500 hover:from-healthcare-700 hover:to-healthcare-600 transition-all shadow-lg shadow-healthcare-500/25 hover:shadow-healthcare-500/40 active:scale-[0.98];
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-healthcare-700 dark:text-healthcare-300 bg-healthcare-50 dark:bg-healthcare-900/30 border border-healthcare-200 dark:border-healthcare-800 hover:bg-healthcare-100 dark:hover:bg-healthcare-900/50 transition-all;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-healthcare-500 focus:border-transparent outline-none transition;
+  }
+}

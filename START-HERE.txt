@@ -1,0 +1,53 @@
+================================================================================
+  SMART DRY EYE SCREENING TOOL — QUICK START
+================================================================================
+
+PREREQUISITES
+  - Node.js 18+
+  - MongoDB running (local or Atlas URI in server/.env)
+
+FIRST TIME SETUP
+  1. Open terminal in this folder
+  2. npm run install:all
+  3. cd server && npm run seed
+     (creates admin@dryeye.com / admin123)
+
+RUN THE APP
+  - Double-click START.bat
+  OR
+  - npm run dev
+
+TROUBLESHOOTING
+  - Error -102: web app not running — run START.bat, wait for port 5173
+  - Port in use: run STOP-PORTS.bat, then START.bat again
+
+URLS
+  - Frontend: http://localhost:5173
+  - API:      http://localhost:5000/api/health
+
+DEMO ACCOUNTS
+  - Admin: admin@dryeye.com / admin123
+  - Or register a new user at /register
+
+MAIN PAGES
+  /              Landing
+  /screening     Questionnaire (guest OK — sign up to save)
+  /results       Latest screening results
+  /dashboard     History, charts, 20-20-20 timer
+  /report/:id    Full report detail
+  /appointment   Book doctor visit
+  /admin         Admin analytics (admin only)
+
+VERIFY SETUP
+  npm run verify     (API + optional frontend check)
+
+DOCS
+  README.md                 Full documentation
+  DEPLOYMENT.md             Production deploy guide
+  docs/DATABASE_SCHEMA.md
+  docs/API.md
+  docs/PROJECT_COMPLETE.md  Feature checklist (all done)
+
+================================================================================
+  PROJECT STATUS: COMPLETE — ready for demo / submission
+================================================================================
